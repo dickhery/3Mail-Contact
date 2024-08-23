@@ -25,35 +25,67 @@
 1. Clone the repository from GitHub:
 
    ```bash
-   git clone https://github.com/yourusername/3mail-contact.git
-   cd 3mail-contact
+   git clone https://github.com/dickhery/3Mail-Contact.git
+   cd 3Mail-Contact
    ```
 
-### Starting the Local Replica
+### Initial Setup and Configuration
 
-To test 3Mail Contact locally:
+After cloning the repository, you'll need to set up the canisters and configure your environment.
 
-1. Start the DFX replica:
+1. **Initialize Git and Install Dependencies:**
 
    ```bash
-   dfx start --background
+   rm -rf .git
+   git init
+   npm install
    ```
 
-2. Deploy the canisters locally:
+2. **Start the Local Replica:**
+
+   ```bash
+   dfx start --clean --background
+   ```
+
+3. **Create Canisters:**
+
+   Create the necessary canisters for your project:
+
+   ```bash
+   dfx canister create threeMail_frontend
+   dfx canister create threeMail_backend
+   dfx canister create internet_identity
+   ```
+
+4. **Build Canisters:**
+
+   Build the canisters to generate the required type declarations:
+
+   ```bash
+   dfx build
+   ```
+
+5. **Deploy the Canisters Locally:**
 
    ```bash
    dfx deploy
    ```
 
-### Configuring Canisters for Mainnet Deployment
+### Deploying to the Internet Computer Mainnet
 
-Before deploying to the Internet Computer mainnet:
+Before deploying to the Internet Computer mainnet, ensure your canisters are properly configured:
 
-1. Update the `canister_ids.json` file with your own canister IDs. You can find this file in the `.dfx` directory after running the `dfx deploy` command.
+1. **Obtain Canister IDs:**
 
-2. Replace the placeholder Principal IDs in the code with your own approved PIDs. This ensures that only you (or those you designate) can access the admin section.
+   Update the `canister_ids.json` file with your own canister IDs. This file is generated in the `.dfx` directory after running the `dfx deploy` command.
 
-3. Redeploy the application:
+2. **Set Admin PIDs:**
+
+   Replace the placeholder Principal IDs in the code with your own approved PIDs. This ensures that only you (or those you designate) can access the admin section.
+
+3. **Deploy to the Internet Computer:**
+
+   Deploy the application to the mainnet:
 
    ```bash
    dfx deploy --network ic
@@ -90,7 +122,6 @@ This URL will allow users to access the contact form, while the admin section wi
    - The app features a dynamic advertising section at the bottom of the page.
    - Three images are randomly displayed, each linking to a different URL.
    - **Customizing Ads:** You can replace the images or URLs by modifying the `ads` array in the `App.jsx` file. New ads can be added, but the original three ads must remain in the rotation to maintain the integrity of the app.
-   - The original ads are a part of the 3Mail Contact brand and must be preserved in any deployed version.
 
 ### Customization
 
